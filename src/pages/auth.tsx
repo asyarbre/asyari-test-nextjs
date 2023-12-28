@@ -1,0 +1,18 @@
+import Login from '@/components/content/auth/Login';
+import Register from '@/components/content/auth/Register';
+import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
+
+export default function AuthPage() {
+  return (
+    <main className='flex px-4 justify-center min-h-screen items-center'>
+      <Tabs defaultValue='login' className='w-[400px]'>
+        <TabsList className='grid w-full grid-cols-2'>
+          <TabsTrigger value='login'>Login</TabsTrigger>
+          <TabsTrigger value='register'>Register</TabsTrigger>
+        </TabsList>
+        <Login />
+        <Register />
+      </Tabs>
+    </main>
+  );
+}
