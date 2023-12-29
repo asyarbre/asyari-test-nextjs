@@ -14,3 +14,23 @@ export async function handleCreateBook(data: CreateBookTypes) {
     token: true,
   });
 }
+
+export async function handleAllBooks() {
+  const url = `${URL_API}/books`;
+
+  return callAPI({
+    url,
+    method: 'GET',
+    token: true,
+  });
+}
+
+export async function handleDetailBook(id: string) {
+  const url = `${URL_API}/books/${id}`;
+
+  return callAPI({
+    url,
+    method: 'GET',
+    token: true,
+  });
+}

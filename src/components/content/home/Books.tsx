@@ -1,92 +1,92 @@
+import { Eye, PenSquare, Trash2 } from 'lucide-react';
+import Link from 'next/link';
+import * as React from 'react';
+
+import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
   TableCaption,
+  TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 
+import { handleAllBooks } from '@/services/books';
+import { GetAllBooksTypes } from '@/services/types';
+
 import AddBook from './components/AddBook';
 
-// const invoices = [
-//   {
-//     invoice: 'INV001',
-//     paymentStatus: 'Paid',
-//     totalAmount: '$250.00',
-//     paymentMethod: 'Credit Card',
-//   },
-//   {
-//     invoice: 'INV002',
-//     paymentStatus: 'Pending',
-//     totalAmount: '$150.00',
-//     paymentMethod: 'PayPal',
-//   },
-//   {
-//     invoice: 'INV003',
-//     paymentStatus: 'Unpaid',
-//     totalAmount: '$350.00',
-//     paymentMethod: 'Bank Transfer',
-//   },
-//   {
-//     invoice: 'INV004',
-//     paymentStatus: 'Paid',
-//     totalAmount: '$450.00',
-//     paymentMethod: 'Credit Card',
-//   },
-//   {
-//     invoice: 'INV005',
-//     paymentStatus: 'Paid',
-//     totalAmount: '$550.00',
-//     paymentMethod: 'PayPal',
-//   },
-//   {
-//     invoice: 'INV006',
-//     paymentStatus: 'Pending',
-//     totalAmount: '$200.00',
-//     paymentMethod: 'Bank Transfer',
-//   },
-//   {
-//     invoice: 'INV007',
-//     paymentStatus: 'Unpaid',
-//     totalAmount: '$300.00',
-//     paymentMethod: 'Credit Card',
-//   },
-// ];
-
 export default function Books() {
+  const [books, setBooks] = React.useState([]);
+
+  React.useEffect(() => {
+    const fetchData = async () => {
+      const response = await handleAllBooks();
+      if (response.error === false) {
+        setBooks(response.data.data);
+      }
+    };
+    fetchData();
+  }, []);
+
   return (
-    <main className='layout'>
+    <main className='layout mb-20'>
       <AddBook />
       <Table>
         <TableCaption>A list of Books</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className='w-[100px]'>ID</TableHead>
+            <TableHead>User ID</TableHead>
             <TableHead>ISBN</TableHead>
             <TableHead>Title</TableHead>
             <TableHead>Author</TableHead>
+            <TableHead>Published</TableHead>
             <TableHead className='text-right'>Action</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
-          {/* {invoices.map((invoice) => (
-            <TableRow key={invoice.invoice}>
-              <TableCell className='font-medium'>{invoice.invoice}</TableCell>
-              <TableCell>{invoice.paymentStatus}</TableCell>
-              <TableCell>{invoice.paymentMethod}</TableCell>
-              <TableCell className='text-right'>
-                {invoice.totalAmount}
+          {books ? (
+            books.map((book: GetAllBooksTypes) => (
+              <TableRow key={book.id}>
+                <TableCell className='font-medium'>{book.id}</TableCell>
+                <TableCell>{book.user_id}</TableCell>
+                <TableCell>{book.isbn}</TableCell>
+                <TableCell>{book.title}</TableCell>
+                <TableCell>{book.author}</TableCell>
+                <TableCell>
+                  {new Date(book.published).toLocaleDateString()}
+                </TableCell>
+                <TableCell className='text-right'>
+                  <Button
+                    variant='outline'
+                    size='icon'
+                    className='mr-2'
+                    asChild
+                  >
+                    <Link href={`/book/${book.id}`}>
+                      <Eye className='h-[1.2rem] w-[1.2rem] text-blue-500' />
+                    </Link>
+                  </Button>
+                  <Button variant='outline' size='icon' className='mr-2'>
+                    <PenSquare className='h-[1.2rem] w-[1.2rem] text-green-500' />
+                  </Button>
+                  <Button variant='outline' size='icon'>
+                    <Trash2 className='h-[1.2rem] w-[1.2rem] text-red-500' />
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell className='text-center' colSpan={11}>
+                No Books Found
               </TableCell>
             </TableRow>
-          ))} */}
+          )}
         </TableBody>
-        {/* <TableFooter>
-          <TableRow>
-            <TableCell colSpan={3}>Total</TableCell>
-            <TableCell className='text-right'>$2,500.00</TableCell>
-          </TableRow>
-        </TableFooter> */}
       </Table>
     </main>
   );
