@@ -12,3 +12,13 @@ export async function handleLogin(data: LoginTypes) {
     data,
   });
 }
+
+export async function handleRegister(data: LoginTypes) {
+  const url = `${URL_API}/register`;
+
+  return callAPI({
+    url,
+    method: 'POST',
+    data,
+  });
+}
