@@ -3,6 +3,8 @@ import Image from 'next/image';
 
 const inter = Inter({ subsets: ['latin'] });
 
+import { GetServerSidePropsContext } from 'next';
+
 export default function Home() {
   return (
     <main
@@ -115,4 +117,20 @@ export default function Home() {
       </div>
     </main>
   );
+}
+
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
+  const { token } = req.cookies;
+  if (!token) {
+    return {
+      redirect: {
+        destination: '/auth',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
