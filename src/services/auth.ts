@@ -1,5 +1,5 @@
 import callAPI from './api';
-import { LoginTypes } from './types';
+import { LoginTypes, RegisterTypes } from './types';
 
 const URL_API = process.env.NEXT_PUBLIC_API_URL;
 
@@ -13,7 +13,7 @@ export async function handleLogin(data: LoginTypes) {
   });
 }
 
-export async function handleRegister(data: LoginTypes) {
+export async function handleRegister(data: RegisterTypes) {
   const url = `${URL_API}/register`;
 
   return callAPI({
