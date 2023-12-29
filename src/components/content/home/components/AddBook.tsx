@@ -64,7 +64,7 @@ export default function AddBook() {
 
   return (
     <Dialog>
-      <DialogTrigger className='mb-4' asChild>
+      <DialogTrigger className='my-4' asChild>
         <Button>Add Book</Button>
       </DialogTrigger>
       <DialogContent className='sm:max-w-[425px]'>
