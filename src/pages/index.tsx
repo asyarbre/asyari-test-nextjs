@@ -1,14 +1,13 @@
 import { GetServerSidePropsContext } from 'next';
 
+import Books from '@/components/content/home/Books';
 import Header from '@/components/content/home/Header';
 
 export default function Home() {
   return (
     <>
       <Header />
-      <div className='layout'>
-        <h1 className='text-2xl font-semibold'>Home</h1>
-      </div>
+      <Books />
     </>
   );
 }
