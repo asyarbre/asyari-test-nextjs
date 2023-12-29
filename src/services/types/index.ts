@@ -18,3 +18,15 @@ export interface DetailUserTypes {
   created_at: string;
   updated_at: string;
 }
+
+export interface CreateBookTypes {
+  isbn: string;
+  title: string;
+  subtitle: string;
+  author: string;
+  published: string;
+  publisher: string;
+  pages: number;
+  description: string;
+  website: string;
+}
