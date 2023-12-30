@@ -1,5 +1,6 @@
 import Cookies from 'js-cookie';
 import { Moon, Sun } from 'lucide-react';
+import { UserRound } from 'lucide-react';
 import Router from 'next/router';
 import { useTheme } from 'next-themes';
 import * as React from 'react';
@@ -48,7 +49,10 @@ export default function Header() {
       <nav className='layout bg-background flex gap-2 items-center justify-end py-4 lg:max-w-[68rem]'>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant='outline'>{`${nameUser} | ${emailUser}`}</Button>
+            <Button variant='outline'>
+              <UserRound className='h-[1.2rem] w-[1.2rem] mr-2' />
+              <span>{`${nameUser} | ${emailUser}`}</span>
+            </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align='end'>
             <DropdownMenuItem onClick={onLogout}>Logout</DropdownMenuItem>
