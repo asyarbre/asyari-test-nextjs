@@ -1,18 +1,30 @@
 import { Eye, PenSquare, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
+import { toast } from 'react-toastify';
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
   TableRow,
 } from '@/components/ui/table';
 
+import { handleDeleteBook } from '@/services/books';
 import { handleAllBooks } from '@/services/books';
 import { GetAllBooksTypes } from '@/services/types';
 
@@ -31,11 +43,22 @@ export default function Books() {
     fetchData();
   }, []);
 
+  const onDelete = async (id: number) => {
+    const response = await handleDeleteBook(id);
+    if (response.error === false) {
+      toast.success(response.message);
+      const newBooks = books.filter((book: GetAllBooksTypes) => book.id !== id);
+      setBooks(newBooks);
+    } else {
+      toast.error(response.message);
+    }
+  };
+
   return (
     <main className='layout mb-20'>
       <AddBook />
+      <h1 className='text-xl font-bold mb-4'>Catalog Books</h1>
       <Table>
-        <TableCaption>A list of Books</TableCaption>
         <TableHeader>
           <TableRow>
             <TableHead className='w-[100px]'>ID</TableHead>
@@ -59,7 +82,7 @@ export default function Books() {
                 <TableCell>
                   {new Date(book.published).toLocaleDateString()}
                 </TableCell>
-                <TableCell className='text-right'>
+                <TableCell className='flex justify-end items-center text-right'>
                   <Button
                     variant='outline'
                     size='icon'
@@ -73,9 +96,29 @@ export default function Books() {
                   <Button variant='outline' size='icon' className='mr-2'>
                     <PenSquare className='h-[1.2rem] w-[1.2rem] text-green-500' />
                   </Button>
-                  <Button variant='outline' size='icon'>
-                    <Trash2 className='h-[1.2rem] w-[1.2rem] text-red-500' />
-                  </Button>
+                  <AlertDialog>
+                    <AlertDialogTrigger>
+                      <Button variant='outline' size='icon'>
+                        <Trash2 className='h-[1.2rem] w-[1.2rem] text-red-500' />
+                      </Button>
+                    </AlertDialogTrigger>
+                    <AlertDialogContent>
+                      <AlertDialogHeader>
+                        <AlertDialogTitle>
+                          Delete Book {book.title}
+                        </AlertDialogTitle>
+                      </AlertDialogHeader>
+                      <AlertDialogDescription>
+                        Are you sure you want to delete this book?
+                      </AlertDialogDescription>
+                      <AlertDialogFooter>
+                        <AlertDialogCancel>Cancel</AlertDialogCancel>
+                        <AlertDialogAction onClick={() => onDelete(book.id)}>
+                          Delete
+                        </AlertDialogAction>
+                      </AlertDialogFooter>
+                    </AlertDialogContent>
+                  </AlertDialog>
                 </TableCell>
               </TableRow>
             ))

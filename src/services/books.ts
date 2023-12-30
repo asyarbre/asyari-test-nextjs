@@ -34,3 +34,13 @@ export async function handleDetailBook(id: string) {
     token: true,
   });
 }
+
+export async function handleDeleteBook(id: number) {
+  const url = `${URL_API}/books/${id}`;
+
+  return callAPI({
+    url,
+    method: 'DELETE',
+    token: true,
+  });
+}
