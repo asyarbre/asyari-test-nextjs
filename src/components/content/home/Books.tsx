@@ -71,7 +71,7 @@ export default function Books() {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {books ? (
+          {books.length > 0 ? (
             books.map((book: GetAllBooksTypes) => (
               <TableRow key={book.id}>
                 <TableCell className='font-medium'>{book.id}</TableCell>
@@ -122,7 +122,7 @@ export default function Books() {
             ))
           ) : (
             <TableRow>
-              <TableCell className='text-center' colSpan={11}>
+              <TableCell className='text-center' colSpan={7}>
                 No Books Found
               </TableCell>
             </TableRow>
