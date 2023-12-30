@@ -35,6 +35,17 @@ export async function handleDetailBook(id: string) {
   });
 }
 
+export async function handleUpdateBook(id: number, data: CreateBookTypes) {
+  const url = `${URL_API}/books/${id}/edit`;
+
+  return callAPI({
+    url,
+    method: 'PUT',
+    data,
+    token: true,
+  });
+}
+
 export async function handleDeleteBook(id: number) {
   const url = `${URL_API}/books/${id}`;
 

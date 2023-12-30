@@ -39,11 +39,28 @@ export interface GetAllBooksTypes {
   subtitle: string;
   author: string;
   published: string;
+  publisher: string;
+  pages: number;
+  description: string;
+  website: string;
 }
 
 export interface DetailBookTypes {
   id: number;
   user_id: number;
+  isbn: string;
+  title: string;
+  subtitle: string;
+  author: string;
+  published: string;
+  publisher: string;
+  pages: number;
+  description: string;
+  website: string;
+}
+
+export interface UpdateBookTypes {
+  id: number;
   isbn: string;
   title: string;
   subtitle: string;

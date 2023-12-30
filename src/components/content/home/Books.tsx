@@ -1,4 +1,4 @@
-import { Eye, PenSquare, Trash2 } from 'lucide-react';
+import { Eye, Trash2 } from 'lucide-react';
 import Link from 'next/link';
 import * as React from 'react';
 import { toast } from 'react-toastify';
@@ -24,11 +24,11 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
-import { handleDeleteBook } from '@/services/books';
-import { handleAllBooks } from '@/services/books';
+import { handleAllBooks, handleDeleteBook } from '@/services/books';
 import { GetAllBooksTypes } from '@/services/types';
 
 import AddBook from './components/AddBook';
+import UpdateBook from './components/UpdateBook';
 
 export default function Books() {
   const [books, setBooks] = React.useState([]);
@@ -93,9 +93,7 @@ export default function Books() {
                       <Eye className='h-[1.2rem] w-[1.2rem] text-blue-500' />
                     </Link>
                   </Button>
-                  <Button variant='outline' size='icon' className='mr-2'>
-                    <PenSquare className='h-[1.2rem] w-[1.2rem] text-green-500' />
-                  </Button>
+                  <UpdateBook book={{ ...book }} />
                   <AlertDialog>
                     <AlertDialogTrigger>
                       <Button variant='outline' size='icon'>
