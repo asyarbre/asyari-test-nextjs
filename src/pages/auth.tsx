@@ -1,3 +1,5 @@
+import { GetServerSidePropsContext } from 'next';
+
 import Login from '@/components/content/auth/Login';
 import Register from '@/components/content/auth/Register';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -15,4 +17,20 @@ export default function AuthPage() {
       </Tabs>
     </main>
   );
+}
+
+export async function getServerSideProps({ req }: GetServerSidePropsContext) {
+  const { token } = req.cookies;
+  if (token) {
+    return {
+      redirect: {
+        destination: '/',
+        permanent: false,
+      },
+    };
+  }
+
+  return {
+    props: {},
+  };
 }
