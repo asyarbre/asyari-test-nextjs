@@ -1,4 +1,42 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+<!-- TABLE OF CONTENTS -->
+<h4>Table of Contents</h4>
+<ol>
+  <li>
+    <a href="#about-the-project">About The Project</a>
+    <ul>
+      <li><a href="#built-with">Built With</a></li>
+      <li><a href="#cicd-environment">CI/CD Environment</a></li>
+    </ul>
+  </li>
+  <li><a href="#getting-started">Getting Started</a></li>
+ <li><a href="#documentation">Documentation</a></li>
+</ol>
+<!-- ABOUT THE PROJECT -->
+
+## About The Project
+This project is for the needs of Pre-Screening Test FullStack Developer at PT Nusantara Infrastructure.
+
+**Link Website :** https://asyari-project-one-jg4xtzv62q-et.a.run.app
+
+### Built With
+Tech Stack :
+- **NextJs**
+- **TypeScript**
+- **Tailwind CSS**
+- **shadcn/ui**
+- **axios**
+
+Google Cloud Servies:
+- **Cloud Build**
+- **Artifact Registry**
+- **Cloud Run**
+
+### CI/CD Environment
+![CICD Environemnt](https://cdn.discordapp.com/attachments/872706873349001261/1190827901688496189/cicd-environment.png)
+For the CI/CD Environment, I'm use Cloud Build with push trigger. When a revision / update to the code is pushed, the diagram as shown above will run the process of revision. Below are the services we use from Google Cloud Platform to develop CI/CD pipeline :
+1. Cloud Build : To create a trigger
+1. Artifact Registry: For the docker images repository
+1. Cloud Run: To run the application
 
 ## Getting Started
 
@@ -24,17 +62,7 @@ The `pages/api` directory is mapped to `/api/*`. Files in this directory are tre
 
 This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+## Documentation
+![cloud-build](https://cdn.discordapp.com/attachments/872706873349001261/1190829757655437362/cloud-build.png)
+![artifact-registry](https://media.discordapp.net/attachments/872706873349001261/1190829758334914612/artifact-registry.png)
+![cloud-run](https://media.discordapp.net/attachments/872706873349001261/1190829757978378320/cloud-run.png)
