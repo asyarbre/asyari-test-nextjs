@@ -32,16 +32,27 @@ import UpdateBook from './components/UpdateBook';
 
 export default function Books() {
   const [books, setBooks] = React.useState([]);
+  const [currentPage, setCurrentPage] = React.useState(1);
+  const [totalPage, setTotalPage] = React.useState(1);
 
   React.useEffect(() => {
-    const fetchData = async () => {
-      const response = await handleAllBooks();
+    const getBooks = async () => {
+      const response = await handleAllBooks(currentPage);
       if (response.error === false) {
         setBooks(response.data.data);
+        setTotalPage(
+          (response as { data: { last_page: number } }).data.last_page,
+        );
+        setCurrentPage(
+          (response as { data: { current_page: number } }).data.current_page,
+        );
+      } else {
+        toast.error(response.message);
       }
     };
-    fetchData();
-  }, []);
+
+    getBooks();
+  }, [currentPage]);
 
   const onDelete = async (id: number) => {
     const response = await handleDeleteBook(id);
@@ -129,6 +140,19 @@ export default function Books() {
           )}
         </TableBody>
       </Table>
+      <div className='flex justify-center items-center mt-4'>
+        {Array.from(Array(totalPage).keys()).map((page) => (
+          <Button
+            key={page}
+            variant={currentPage === page + 1 ? 'secondary' : 'outline'}
+            size='icon'
+            className='mx-1'
+            onClick={() => setCurrentPage(page + 1)}
+          >
+            {page + 1}
+          </Button>
+        ))}
+      </div>
     </main>
   );
 }

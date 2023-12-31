@@ -15,8 +15,8 @@ export async function handleCreateBook(data: CreateBookTypes) {
   });
 }
 
-export async function handleAllBooks() {
-  const url = `${URL_API}/books`;
+export async function handleAllBooks(page: number) {
+  const url = `${URL_API}/books?page=${page}`;
 
   return callAPI({
     url,
